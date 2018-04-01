@@ -42,11 +42,12 @@ class SkipList[A](maxLvl : Int) {
         prev = cur
         cur = cur.getNext(lvl)
       }
-
+      // checks if value exists
       if(cur.getVal() == num){
         return false
 
       }
+      //if cur is the last node in list
       else if(cur == null){
         val node: Node[A]  = new Node[A](num, lvl)
         prev.addNode(node,lvl)
@@ -56,6 +57,7 @@ class SkipList[A](maxLvl : Int) {
         prev = null
 
       }
+      // all other cases
       else{
         val node: Node[A]  = new Node[A](num, lvl)
         //remove from list

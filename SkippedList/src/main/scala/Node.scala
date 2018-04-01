@@ -10,6 +10,10 @@ class Node[A](var value : A, lvl : Int){
   }
 
   def addNode(node : Node[A], lvl : Int): Unit = {
+    if(nodes.get(lvl) != null){
+      nodes.remove(lvl)
+      nodes.add(lvl, node)
+    }
     nodes.add(lvl, node)
   }
 
