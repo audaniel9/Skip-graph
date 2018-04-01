@@ -4,7 +4,7 @@
 		module="skippedlist$sources"
 		revision="0.1"
 		status="integration"
-		publication="20180326162151"
+		publication="20180330151135"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>
