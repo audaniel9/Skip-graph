@@ -1,13 +1,19 @@
-import scala.util.Random
-import scala.util.Sorting
 
-class SkipList[A](maxLvl : Int) {
+
+
+import scala.util.Random
+
+class SkipList[A<% Ordered[A]](maxLvl : Int){
   var size : Int = 0
   var header : Array[Node[A]] = new Array[Node[A]](maxLvl)
   header.map(_ => null)
 
   // compare two generics
-  def compare[A <% Ordered[A]] (x:A, y:A):Boolean = x > y
+
+// def compare[A](a1: A, a2: A): Boolean = {
+//   a1 > a2
+// }
+
 
   //chooses a random lvl for
   def chooseLevel(): Int = {
@@ -38,14 +44,15 @@ class SkipList[A](maxLvl : Int) {
     // loop to find where to insert at every lvl
     while(lvl >= 0) {
       // finds the pos at a each lvl
-      while (cur != null && compare(num, cur.getVal())) {
+      while (cur != null && num > cur.getVal()) {
         prev = cur
         cur = cur.getNext(lvl)
       }
-      // checks if value exists
-      if(cur.getVal() == num){
-        return false
-
+      if(prev == null && cur == null){
+        val node: Node[A]  = new Node[A](num, lvl)
+        header(lvl) = node
+        node.addNode(null,lvl)
+        lvl-=1
       }
       //if cur is the last node in list
       else if(cur == null){
@@ -55,6 +62,11 @@ class SkipList[A](maxLvl : Int) {
         lvl-=1
         cur = prev
         prev = null
+
+      }
+      // checks if value exists
+      else if(cur.getVal() == num){
+        return false
 
       }
       // all other cases
@@ -74,7 +86,7 @@ class SkipList[A](maxLvl : Int) {
   }
 
   def printList(): Unit = {
-    var lvl : Int = maxLvl
+    var lvl : Int = maxLvl - 1
     while(lvl >= 0){
       var cur = header(lvl)
       println("level: " + lvl)
@@ -85,8 +97,12 @@ class SkipList[A](maxLvl : Int) {
       print("\n")
       lvl-=1
     }
+
   }
 
 }
+
+
+
 
 

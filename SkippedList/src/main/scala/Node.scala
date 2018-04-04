@@ -1,28 +1,31 @@
+
+
 import java.util._
 
 // Node class
 // the arraylist should be organized from closest to farthest nodes
 class Node[A](var value : A, lvl : Int){
-  var nodes : ArrayList[Node[A]] = new ArrayList[Node[A]](lvl)
+  var nodes : Array[Node[A]] = new Array[Node[A]](lvl + 1)
+
+  for(i <- 0 to lvl){
+    nodes(i) = null
+  }
 
   def getVal() : A = {
     return value
   }
 
   def addNode(node : Node[A], lvl : Int): Unit = {
-    if(nodes.get(lvl) != null){
-      nodes.remove(lvl)
-      nodes.add(lvl, node)
-    }
-    nodes.add(lvl, node)
+    nodes(lvl) = node
+
   }
 
-  def getNodes(): ArrayList[Node[A]] = {
+  def getNodes(): Array[Node[A]] = {
     return nodes
   }
 
   def getNext(lvl : Int): Node[A] = {
-    return nodes.get(lvl)
+    return nodes(lvl)
   }
 
   // if value needs an equals functions to work
@@ -33,12 +36,13 @@ class Node[A](var value : A, lvl : Int){
   // removes based on the equality of value
   def deleteNode(v : A): Unit = {
 
-    for( i <- 0 to nodes.size()){
-      if(nodes.get(i).getVal().equals(v)){
-        nodes.remove(i)
+    for( i <- 0 to nodes.length){
+      if(nodes(i).getVal().equals(v)){
+        nodes(i) = null
       }
     }
   }
+
 
 
 }
