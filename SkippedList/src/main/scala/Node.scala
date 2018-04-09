@@ -5,6 +5,7 @@ import java.util._
 // Node class
 // the arraylist should be organized from closest to farthest nodes
 class Node[A](var value : A, lvl : Int){
+  // next nodes
   var nodes : Array[Node[A]] = new Array[Node[A]](lvl + 1)
 
   for(i <- 0 to lvl){
@@ -16,6 +17,10 @@ class Node[A](var value : A, lvl : Int){
   }
 
   def addNode(node : Node[A], lvl : Int): Unit = {
+//    if(node != null){
+//      println("adds node for " + value + " node is " + node.getVal())
+//    }
+
     nodes(lvl) = node
 
   }

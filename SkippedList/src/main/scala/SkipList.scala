@@ -23,9 +23,11 @@ class SkipList[A<% Ordered[A]](maxLvl : Int){
 
   def addNode(num : A): Boolean = {
     var lvl: Int = chooseLevel()
+    val node: Node[A]  = new Node[A](num, lvl)
+    println("For num: " + num + " at lvl" + lvl)
     // if empty
     if(header(0) == null){
-      val node: Node[A]  = new Node[A](num, lvl)
+      //val node: Node[A]  = new Node[A](num, lvl)
       for(i <- 0 to lvl){
         header(i) = node
       }
@@ -34,7 +36,7 @@ class SkipList[A<% Ordered[A]](maxLvl : Int){
     }
     // if the lvl is empty
     if(header(lvl) == null){
-      val node: Node[A]  = new Node[A](num, lvl)
+      //val node: Node[A]  = new Node[A](num, lvl)
       header(lvl) = node
       lvl -= 1
     }
@@ -48,38 +50,57 @@ class SkipList[A<% Ordered[A]](maxLvl : Int){
         prev = cur
         cur = cur.getNext(lvl)
       }
+
       if(prev == null && cur == null){
-        val node: Node[A]  = new Node[A](num, lvl)
+        //println("For " + num + " first if statement is triggered" + " at lvl " + lvl)
+        //val node: Node[A]  = new Node[A](num, lvl)
         header(lvl) = node
         node.addNode(null,lvl)
-        lvl-=1
-      }
-      //if cur is the last node in list
-      else if(cur == null){
-        val node: Node[A]  = new Node[A](num, lvl)
-        prev.addNode(node,lvl)
-        node.addNode(null,lvl)
-        lvl-=1
-        cur = prev
-        prev = null
+        if(lvl > 0) {
+          cur = header(lvl - 1)
+        }
+
 
       }
+//      //if cur is the last node in list
+//      else if(cur == null){
+//        println("For " + num + " second if statement is triggered" + "at lvl " + lvl)
+//       // val node: Node[A]  = new Node[A](num, lvl)
+//        prev.addNode(node,lvl)
+//        node.addNode(null,lvl)
+//
+//        cur = prev
+//        prev = null
+//
+//      }
       // checks if value exists
-      else if(cur.getVal() == num){
+      else if(cur != null && cur.getVal() == num){
         return false
 
       }
+      else if(header(lvl).getVal() > node.getVal()){
+        node.addNode(header(lvl), lvl)
+        header(lvl) = node
+        if(lvl > 0) {
+          cur = header(lvl - 1)
+        }
+      }
       // all other cases
       else{
-        val node: Node[A]  = new Node[A](num, lvl)
-        //remove from list
-        prev.addNode(node,lvl)
+        //println("For " + num + " third if statement is triggered"+ "at lvl " + lvl)
+       // val node: Node[A]  = new Node[A](num, lvl)
+
+        if(prev != null) {
+          prev.addNode(node, lvl)
+          //println("the prev node is " + prev.getVal() + " for " + num)
+        }
         node.addNode(cur, lvl)
 
-        lvl-=1
+
         cur = prev
-        prev = null
+        //prev = null
       }
+      lvl-=1
     }
 
     return true
