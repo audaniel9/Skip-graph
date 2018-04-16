@@ -15,6 +15,10 @@ object Main {
     skipList.addNode(545)
 
     skipList.printList()
+    println(skipList.search(3))
+    println(skipList.search(4))
+    println(skipList.search(565))
+    println(skipList.search(34))
   }
 
 }
