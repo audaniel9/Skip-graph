@@ -1,5 +1,7 @@
-import org.scalatest._
+import org.scalatest.Funsuite
 
-class SkipListSpec extends BaseTestClass {
+class SkipListSpec extends Funsuite {
+  test("SkipList.chooseLevel") {
 
+  }
 }
