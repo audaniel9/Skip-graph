@@ -28,18 +28,20 @@ class NodeSpec extends FunSuite {
     nodes(1) = nextNode
 
     assert()
-  }
+  }*/
 
   // Compare node values
   test("Node[A].equals") {
-    var Node[A].value1 = 5;
-    var Node[A].value2 = 5;
-    assert(Node[A].value1 == Node[A].value2);
-    //todo
-  }*/
+    var newNode : Node[Int] = new Node[Int](2,2)
+    assert(newNode.value === newNode.getVal)
+  }
 
   // Delete a node
   test("Node[A].deleteNode") {
-    //todo
+    var newNode : Node[Int]= new Node[Int](2,5)
+    for(i <- 0 to 5) {
+      newNode.nodes(i) = new Node[Int](i,i)
+      println(newNode.nodes(i))
+    }
   }
 }
