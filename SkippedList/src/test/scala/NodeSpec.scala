@@ -16,9 +16,9 @@ class NodeSpec extends FunSuite {
   // Get nodes
   test("Node[A].getNodes") {
     var newNode : Node[Int] = new Node[Int](1,3)
-    assert(newNode.getNodes === Node[Int](4))
+    assert(newNode.getNodes === newNode.nodes)
   }
-
+/*
   // Get next node
   test("Node[A].getNext") {
     var newNode : Node[Int] = new Node[Int](2,2)
@@ -31,17 +31,12 @@ class NodeSpec extends FunSuite {
   }
 
   // Compare node values
-  /*test("Node[A].equals") {
+  test("Node[A].equals") {
     var Node[A].value1 = 5;
     var Node[A].value2 = 5;
     assert(Node[A].value1 == Node[A].value2);
     //todo
   }*/
-
-  // Delete a node
-  test("Node[A].deleteNode") {
-    //todo
-  }
 
   // Delete a node
   test("Node[A].deleteNode") {
