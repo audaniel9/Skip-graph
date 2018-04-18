@@ -47,7 +47,4 @@ class Node[A](var value : A, lvl : Int){
       }
     }
   }
-
-
-
 }
