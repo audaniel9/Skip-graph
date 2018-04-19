@@ -24,9 +24,6 @@ class NodeSpec extends FunSuite {
     var newNode : Node[Int] = new Node[Int](2,2)
     var nextNode : Node[Int] = new Node[Int](3,2)
 
-    nodes(0) = newNode
-    nodes(1) = nextNode
-
     assert()
   }*/
 
