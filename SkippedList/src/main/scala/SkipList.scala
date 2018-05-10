@@ -74,7 +74,7 @@ class SkipList[A<% Ordered[A]](maxLvl : Int){
 
     return true
   }
-
+  // search for node based on value
   def search(key: A): Boolean = {
     var lvl : Int = maxLvl -1
 
@@ -103,6 +103,29 @@ class SkipList[A<% Ordered[A]](maxLvl : Int){
 
     }
     return false
+  }
+
+  def delete(key: A): Unit = {
+    var lvl : Int = maxLvl - 1
+
+    while(lvl >= 0){
+      var cur : Node[A] = header(lvl)
+      var prev : Node[A] = null
+
+      while (cur != null && key > cur.getVal()) {
+        prev = cur
+        cur = cur.getNext(lvl)
+      }
+      if(key == cur.getVal()) {
+        if (prev == null) {
+          header(lvl) = cur.getNext(lvl)
+
+        } else {
+          prev.addNode(cur.getNext(lvl), lvl)
+        }
+      }
+      lvl -= 1
+    }
   }
 
   def printList(): Unit = {
