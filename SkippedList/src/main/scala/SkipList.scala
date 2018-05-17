@@ -18,13 +18,14 @@ class SkipList[A<% Ordered[A]](maxLvl : Int){
   def addNode(num : A): Boolean = {
     var lvl: Int = chooseLevel()
     val node: Node[A]  = new Node[A](num, lvl)
-    println("For num: " + num + " at lvl" + lvl)
+    //println("For num: " + num + " at lvl" + lvl)
 
     // if empty
     if(header(0) == null){
       for(i <- 0 to lvl){
         header(i) = node
       }
+      size+=1
       return true
 
     }
@@ -71,10 +72,10 @@ class SkipList[A<% Ordered[A]](maxLvl : Int){
       }
       lvl-=1
     }
-
+    size +=1
     return true
   }
-
+  // search for node based on value
   def search(key: A): Boolean = {
     var lvl : Int = maxLvl -1
 
@@ -104,6 +105,35 @@ class SkipList[A<% Ordered[A]](maxLvl : Int){
     }
     return false
   }
+
+  def delete(key: A): Unit = {
+    var lvl : Int = maxLvl - 1
+    var found : Boolean = false
+    while(lvl >= 0){
+      var cur : Node[A] = header(lvl)
+      var prev : Node[A] = null
+
+      while (cur != null && key > cur.getVal()) {
+        prev = cur
+        cur = cur.getNext(lvl)
+      }
+      if(cur != null && key == cur.getVal()) {
+        found = true
+        if (prev == null) {
+          header(lvl) = cur.getNext(lvl)
+
+        } else {
+          prev.addNode(cur.getNext(lvl), lvl)
+        }
+      }
+      lvl -= 1
+    }
+    if(found){
+      size -= 1
+    }
+  }
+
+  def getSize(): Int = size
 
   def printList(): Unit = {
     var lvl : Int = maxLvl - 1
