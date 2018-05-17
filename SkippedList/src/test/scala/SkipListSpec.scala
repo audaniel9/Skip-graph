@@ -2,12 +2,6 @@ import org.scalatest.FunSuite
 
 class SkipListSpec extends FunSuite {
 
-  // Choose a level
-  test("SkipList.chooseLevel") {
-   // val newList : SkipList[Node[Int]]= new SkipList[Node[Int]](4)
-   // assert(newList.chooseLevel < 4)
-  }
-
   test("add node"){
     val newList : SkipList[Int] =  new SkipList[Int](4)
     newList.addNode(1)
