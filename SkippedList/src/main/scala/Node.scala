@@ -41,10 +41,13 @@ class Node[A](var value : A, lvl : Int){
   // removes based on the equality of value
   def deleteNode(v : A): Unit = {
 
-    for( i <- 0 to nodes.length){
-      if(nodes(i).getVal().equals(v)){
-        nodes(i) = null
+    for( i <- 0 to nodes.length-1){
+      if(nodes(i) != null){
+        if(nodes(i).getVal().equals(v)){
+          nodes(i) = null
+        }
       }
+
     }
   }
 }
